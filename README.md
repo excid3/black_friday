@@ -56,6 +56,12 @@ BlackFriday.active?(:black_friday, :labor_day)
 #=> true/false
 ```
 
+Render a banner when a sale is active:
+
+```erb
+<%= render "banners/black_friday" if BlackFriday.active?(:black_friday) %>
+```
+
 To check the active sales:
 
 ```ruby
