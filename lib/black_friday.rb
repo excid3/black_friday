@@ -37,6 +37,10 @@ module BlackFriday
     range.cover?(range.first.is_a?(Date) ? Date.today : Time.current)
   end
 
+  def range_for(sale_name)
+    instance_eval(&sales.fetch(sale_name))
+  end
+
   # Date helpers
 
   def thanksgiving(year = Date.today.year)

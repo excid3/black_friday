@@ -66,4 +66,10 @@ class TestBlackFriday < Minitest::Test
   ensure
     Time.zone = nil
   end
+
+  def test_range_for
+    range = Date.yesterday..Date.tomorrow
+    BlackFriday.add_sale { range }
+    assert_equal range, BlackFriday.range_for(:black_friday)
+  end
 end
