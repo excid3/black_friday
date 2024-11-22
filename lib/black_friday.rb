@@ -34,7 +34,7 @@ module BlackFriday
   end
 
   def in_range?(range)
-    range.include?(range.first.is_a?(Date) ? Date.today : Time.current)
+    range.cover?(range.first.is_a?(Date) ? Date.today : Time.current)
   end
 
   # Date helpers

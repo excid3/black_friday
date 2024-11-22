@@ -3,6 +3,10 @@
 require "test_helper"
 
 class TestBlackFriday < Minitest::Test
+  def setup
+    BlackFriday.sales.clear
+  end
+
   def test_that_it_has_a_version_number
     refute_nil ::BlackFriday::VERSION
   end
@@ -32,8 +36,6 @@ class TestBlackFriday < Minitest::Test
     block = -> {}
     BlackFriday.add_sale(&block)
     assert_equal block, BlackFriday.sales[:black_friday]
-  ensure
-    BlackFriday.sales.delete(:black_friday)
   end
 
   def test_active_sale
@@ -55,5 +57,13 @@ class TestBlackFriday < Minitest::Test
   def test_current_sale
     BlackFriday.add_sale { Date.yesterday..Date.tomorrow }
     assert :black_friday, BlackFriday.current_sale
+  end
+
+  def test_in_range_with_time_with_zone
+    Time.zone = "Central Time (US & Canada)"
+    BlackFriday.add_sale { Time.current.yesterday..Time.current.tomorrow }
+    assert BlackFriday.active?
+  ensure
+    Time.zone = nil
   end
 end
