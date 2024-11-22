@@ -27,4 +27,33 @@ class TestBlackFriday < Minitest::Test
     assert_equal Date.new(2026, 11, 30), BlackFriday.cyber_monday(2026)
     assert_equal Date.new(2029, 11, 26), BlackFriday.cyber_monday(2029)
   end
+
+  def test_add_sale
+    block = -> {}
+    BlackFriday.add_sale(&block)
+    assert_equal block, BlackFriday.sales[:black_friday]
+  ensure
+    BlackFriday.sales.delete(:black_friday)
+  end
+
+  def test_active_sale
+    BlackFriday.add_sale { Date.yesterday..Date.tomorrow }
+    assert BlackFriday.active?
+  end
+
+  def test_inactive_sale
+    BlackFriday.add_sale { Date.yesterday..Date.yesterday }
+    refute BlackFriday.active?
+  end
+
+  def test_current_sales
+    BlackFriday.add_sale { Date.yesterday..Date.tomorrow }
+    BlackFriday.add_sale(:extra) { Date.tomorrow..Date.tomorrow }
+    assert [:black_friday, :extra], BlackFriday.current_sales
+  end
+
+  def test_current_sale
+    BlackFriday.add_sale { Date.yesterday..Date.tomorrow }
+    assert :black_friday, BlackFriday.current_sale
+  end
 end
