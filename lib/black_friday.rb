@@ -40,7 +40,9 @@ module BlackFriday
   # Date helpers
 
   def thanksgiving(year = Date.today.year)
-    first_thursday(year) + 3.weeks
+    nov_1st = Date.new(year, 11, 1)
+    first_thursday = nov_1st.thursday? ? nov_1st : nov_1st.next_occurring(:thursday)
+    first_thursday + 3.weeks
   end
 
   def black_friday(year = Date.today.year)
@@ -49,14 +51,5 @@ module BlackFriday
 
   def cyber_monday(year = Date.today.year)
     thanksgiving(year) + 4.days
-  end
-
-  def first_thursday(year = Date.today.year)
-    day = nov_1st(year)
-    day.thursday? ? day : day.next_occurring(:thursday)
-  end
-
-  def nov_1st(year = Date.today.year)
-    Date.new(year, 11, 1)
   end
 end
