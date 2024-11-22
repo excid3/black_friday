@@ -2,6 +2,8 @@
 
 Add Black Friday sales to your Rails app.
 
+[![Ruby](https://github.com/excid3/black_friday/actions/workflows/main.yml/badge.svg)](https://github.com/excid3/black_friday/actions/workflows/main.yml)
+
 ## Installation
 
 Install the gem and add to the application's Gemfile by executing:
