@@ -18,6 +18,13 @@ class TestBlackFriday < Minitest::Test
     assert_equal Date.new(2029, 11, 22), BlackFriday.thanksgiving(2029)
   end
 
+  def test_canadian_thanksgiving
+    assert_equal Date.new(2024, 10, 14), BlackFriday.canadian_thanksgiving(2024)
+    assert_equal Date.new(2025, 10, 13), BlackFriday.canadian_thanksgiving(2025)
+    assert_equal Date.new(2026, 10, 12), BlackFriday.canadian_thanksgiving(2026)
+    assert_equal Date.new(2029, 10, 8), BlackFriday.canadian_thanksgiving(2029)
+  end
+
   def test_black_friday
     assert_equal Date.new(2024, 11, 29), BlackFriday.black_friday(2024)
     assert_equal Date.new(2025, 11, 28), BlackFriday.black_friday(2025)

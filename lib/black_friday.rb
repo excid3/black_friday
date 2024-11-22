@@ -49,6 +49,12 @@ module BlackFriday
     first_thursday + 3.weeks
   end
 
+  def canadian_thanksgiving(year = Date.today.year)
+    oct_1st = Date.new(year, 10, 1)
+    first_monday = oct_1st.monday? ? oct_1st : oct_1st.next_occurring(:monday)
+    first_monday + 1.weeks
+  end
+
   def black_friday(year = Date.today.year)
     thanksgiving(year) + 1.day
   end
