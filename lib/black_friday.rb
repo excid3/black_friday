@@ -24,8 +24,8 @@ module BlackFriday
   end
 
   def current_sales
-    sales.select do |name, block|
-      in_range? instance_eval(&block)
+    sales.filter_map do |name, block|
+      name if in_range? instance_eval(&block)
     end
   end
 

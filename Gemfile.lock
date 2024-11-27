@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    black_friday (1.0.3)
+    black_friday (1.0.4)
       activesupport
 
 GEM

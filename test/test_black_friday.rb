@@ -50,20 +50,29 @@ class TestBlackFriday < Minitest::Test
     assert BlackFriday.active?
   end
 
+  def test_active_sale_by_name
+    BlackFriday.add_sale { Date.yesterday..Date.tomorrow }
+    assert BlackFriday.active?(:black_friday)
+    refute BlackFriday.active?(:invalid)
+  end
+
   def test_inactive_sale
     BlackFriday.add_sale { Date.yesterday..Date.yesterday }
     refute BlackFriday.active?
+    refute BlackFriday.active?(:black_friday)
+    refute BlackFriday.active?(:invalid)
   end
 
   def test_current_sales
     BlackFriday.add_sale { Date.yesterday..Date.tomorrow }
-    BlackFriday.add_sale(:extra) { Date.tomorrow..Date.tomorrow }
-    assert [:black_friday, :extra], BlackFriday.current_sales
+    BlackFriday.add_sale(:extra) { Date.yesterday..Date.tomorrow }
+    BlackFriday.add_sale(:tomorrow) { Date.tomorrow..Date.tomorrow }
+    assert_equal [:black_friday, :extra], BlackFriday.current_sales
   end
 
   def test_current_sale
     BlackFriday.add_sale { Date.yesterday..Date.tomorrow }
-    assert :black_friday, BlackFriday.current_sale
+    assert_equal :black_friday, BlackFriday.current_sale
   end
 
   def test_in_range_with_time_with_zone
