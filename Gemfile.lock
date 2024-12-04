@@ -33,7 +33,7 @@ GEM
     language_server-protocol (3.17.0.3)
     lint_roller (1.1.0)
     logger (1.6.1)
-    minitest (5.25.2)
+    minitest (5.25.3)
     parallel (1.26.3)
     parser (3.3.6.0)
       ast (~> 2.4.1)
@@ -82,7 +82,7 @@ PLATFORMS
 
 DEPENDENCIES
   black_friday!
-  minitest (~> 5.16)
+  minitest (~> 5.25)
   rake (~> 13.0)
   standard (~> 1.3)
 
